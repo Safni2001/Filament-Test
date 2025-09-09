@@ -39,7 +39,8 @@ class Product extends Model
      */
     public function productTypes(): MorphToMany
     {
-        return $this->morphToMany(ProductType::class, 'type_assignable', 'type_assignments')
-            ->withPivot('my_bonus_field');
+        return $this->morphToMany(ProductType::class, 'type_assignable', 'type_assignments', 'type_assignable_id', 'product_type_id')
+            ->withPivot('my_bonus_field')
+            ->withTimestamps();
     }
 }

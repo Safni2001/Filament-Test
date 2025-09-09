@@ -578,7 +578,7 @@ body {
 .fi-icon-btn {
     border-radius: 50%; /* Circular shape */
     transition: all 0.2s ease-in-out;
-    position: relative;
+    /* position: relative; */
 }
 .fi-icon-btn:hover {
     background-color: var(--primary-50);
