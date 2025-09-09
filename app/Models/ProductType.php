@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Models;
+
+use App\Models\ProductCategory;
+use App\Models\Product;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+
+/**
+ * @property int $id
+ * @property string $name
+ * @property int|null $api_unique_number
+ */
+class ProductType extends Model
+{
+    use HasFactory;
+
+    /**
+     * Get the product categories that own the type.
+     */
+    public function productCategories(): MorphToMany
+    {
+        return $this->morphedByMany(ProductCategory::class, 'type_assignable', 'type_assignments')
+            ->withPivot('my_bonus_field');
+    }
+
+    /**
+     * Get the products that own the type.
+     */
+    public function products(): MorphToMany
+    {
+        return $this->morphedByMany(Product::class, 'type_assignable', 'type_assignments')
+            ->withPivot('my_bonus_field');
+    }
+}
