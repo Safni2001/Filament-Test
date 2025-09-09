@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
@@ -22,8 +23,17 @@ class ProductCategory extends Model
      */
     public function productTypes(): MorphToMany
     {
-        return $this->morphToMany(ProductType::class, 'type_assignable', 'type_assignments')
-            ->withPivot('my_bonus_field');
+        return $this->morphToMany(ProductType::class, 'type_assignable', 'type_assignments', 'type_assignable_id', 'product_type_id')
+            ->withPivot('my_bonus_field')
+            ->withTimestamps();
+    }
+
+    /**
+     * Get the products that belong to this category.
+     */
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
     }
 
     /**

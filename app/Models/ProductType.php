@@ -22,8 +22,9 @@ class ProductType extends Model
      */
     public function productCategories(): MorphToMany
     {
-        return $this->morphedByMany(ProductCategory::class, 'type_assignable', 'type_assignments')
-            ->withPivot('my_bonus_field');
+        return $this->morphedByMany(ProductCategory::class, 'type_assignable', 'type_assignments', 'product_type_id', 'type_assignable_id')
+            ->withPivot('my_bonus_field')
+            ->withTimestamps();
     }
 
     /**
@@ -31,7 +32,8 @@ class ProductType extends Model
      */
     public function products(): MorphToMany
     {
-        return $this->morphedByMany(Product::class, 'type_assignable', 'type_assignments')
-            ->withPivot('my_bonus_field');
+        return $this->morphedByMany(Product::class, 'type_assignable', 'type_assignments', 'product_type_id', 'type_assignable_id')
+            ->withPivot('my_bonus_field')
+            ->withTimestamps();
     }
 }
