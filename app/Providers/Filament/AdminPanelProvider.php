@@ -63,6 +63,7 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->databaseTransactions()
+            ->databaseNotifications()
             ->sidebarCollapsibleOnDesktop()
             ->authMiddleware([
                 Authenticate::class,

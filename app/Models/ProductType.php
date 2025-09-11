@@ -12,10 +12,23 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  * @property int $id
  * @property string $name
  * @property int|null $api_unique_number
+ * @property string|null $street_name
+ * @property string|null $suburb
+ * @property string|null $postcode
+ * @property string|null $state
  */
 class ProductType extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'api_unique_number',
+        'street_name',
+        'suburb',
+        'postcode',
+        'state',
+    ];
 
     /**
      * Get the product categories that own the type.
